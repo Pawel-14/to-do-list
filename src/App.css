@@ -75,36 +75,24 @@ p {
 }
 
 .center-addbtn {
-  height: 1vh;
+  height: 5vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.popup-container {
+.newtask-popup-title {
+  font-size: 170%;
+  padding-bottom: 5%;
+}
+
+.newtask-modalbox {
   color: white;
-  border: 2px solid #1F6FEB;
-  background-color: #172237;
-  border-radius: 3%;
-  padding: 1%;
-  position: fixed;
-  width: 45vh;
-  height: 50vh;
-  top: 0;
-  bottom: 15vh;
-  left: 0;
-  right: 0;
-  margin: auto;
-  text-align: center;
 }
 
-.popup-title {
-  font-size: 200%;
-}
-
-.addbtn {
-  position: absolute;
-  bottom: 15%;
+.cancel-newtask-btn {
+  display: flex;
+  justify-content: right
 }
 
 .footer {

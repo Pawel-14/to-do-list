@@ -1,13 +1,13 @@
-import "./App.css";
+import "../App.css";
 import React, { useState } from "react";
 import IconButton from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import EditIcon from "@mui/icons-material/Edit";
-import DoneIcon from "@mui/icons-material/Done";
 import DeleteIcon from "@mui/icons-material/Delete";
-export default function TaskActions({ ActionDelete }) {
+
+export default function TaskActions({ ActionDelete, handleOpenTask }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -18,6 +18,11 @@ export default function TaskActions({ ActionDelete }) {
   const handleDelete = () => {
     setAnchorEl(null);
     ActionDelete();
+  };
+
+  const handleUpdate = () => {
+    setAnchorEl(null);
+    handleOpenTask();
   };
 
   const handleClose = () => {
@@ -40,17 +45,12 @@ export default function TaskActions({ ActionDelete }) {
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
-        back
         MenuListProps={{
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={""}>
-          <DoneIcon />
-          Done
-        </MenuItem>
-        <MenuItem onClick={""}>
-          <EditIcon />
+        <MenuItem>
+          <EditIcon onClick={handleUpdate} />
           Edit
         </MenuItem>
         <MenuItem onClick={handleDelete}>

@@ -1,8 +1,7 @@
 import "./App.css";
-import AddNewTask from "./AddNewTask";
-import TaskList from "./TaskList";
-import Footer from "./Footer";
-
+import TaskList from "./components/TaskList";
+import AddNewTask from "./components/AddNewTask";
+import Footer from "./components/Footer";
 export default function App() {
   return (
     <div className="main">
