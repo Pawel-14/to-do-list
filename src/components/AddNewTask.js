@@ -22,7 +22,7 @@ const style = {
   pb: 3,
 };
 
-export default function AddNewTask() {
+export default function AddNewTask(props) {
   const [open, setOpen] = useState(false);
   const [text, setText] = useState("");
 
@@ -60,7 +60,8 @@ export default function AddNewTask() {
     axios
       .request(options)
       .then(function (response) {
-        console.log(response.data);
+        console.log(response.data)
+          props.onAdd();
       })
       .catch(function (error) {
         console.error(error);
