@@ -7,7 +7,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-export default function TaskActions({ ActionDelete, ActionUpdate, taskId }) {
+export default function TaskActions({ ActionDelete, ActionUpdate }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -16,19 +16,13 @@ export default function TaskActions({ ActionDelete, ActionUpdate, taskId }) {
   };
 
   const handleUpdate = () => {
-    if (ActionUpdate) {
-      ActionUpdate(taskId);
-      setAnchorEl(null);
-      console.log("editgui1:", ActionUpdate);
-    }
+    ActionUpdate();
+    setAnchorEl(null);
   };
 
   const handleDelete = () => {
-    if (ActionDelete) {
-      ActionDelete(taskId);
-      setAnchorEl(null);
-      console.log("editgui2:", ActionDelete);
-    }
+    ActionDelete();
+    setAnchorEl(null);
   };
 
   const handleClose = () => {

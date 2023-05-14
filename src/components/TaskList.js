@@ -10,6 +10,9 @@ import UpdateTask from "./UpdateTask";
 export default function TaskList() {
   const [tasks, setTasks] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null);
+  const [selectedTask2, setSelectedTask2] = useState(null);
+  const [TaskId, setTaskId] = useState(null);
+  const [TaskName, setTaskName] = useState("");
 
   const auth = "Bearer 1/1204522153610557:c273f615edb3d7722a3a6104335b636e";
   const project = "1204530829133645";
@@ -18,16 +21,18 @@ export default function TaskList() {
     setSelectedTask(task);
   };
 
-  const handleUpdateClick = (task) => {
-    setSelectedTask(task);
-  };
-
   const handleDeleteConfirm = () => {
     setSelectedTask(null);
   };
 
+  const handleUpdateClick = (task) => {
+    setSelectedTask2(task);
+    setTaskId(task.gid);
+    setTaskName(task.name);
+  };
+
   const handleUpdateConfirm = () => {
-    setSelectedTask(null);
+    setSelectedTask2(null);
   };
 
   const handletasks = () => {
@@ -98,7 +103,6 @@ export default function TaskList() {
                   <TaskActions
                     ActionDelete={() => handleDeleteClick(task)}
                     ActionUpdate={() => handleUpdateClick(task)}
-                    taskId={task.gid}
                   />
                 </div>
               </div>
@@ -106,14 +110,19 @@ export default function TaskList() {
           )}
         </Stack>
       </div>
+
+      <UpdateTask
+        open2={Boolean(selectedTask2)}
+        onClose2={handleUpdateConfirm}
+        taskId={TaskId}
+        taskName={TaskName}
+        gettasks={handletasks}
+      />
+
       <DeleteTask
         open={Boolean(selectedTask)}
         onClose={handleDeleteConfirm}
         onDelete={handleTaskDelete}
-      />
-      <UpdateTask
-        open2={Boolean(selectedTask)}
-        onClose2={handleUpdateConfirm}
       />
       <AddNewTask gettasks={handletasks}></AddNewTask>
     </div>

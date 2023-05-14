@@ -1,6 +1,6 @@
 import "../App.css";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -21,42 +21,58 @@ const style = {
   pb: 3,
 };
 
-export default function UpdateTask({ open2, onClose2 }) {
-  const [open, setOpen2] = useState(false);
+export default function UpdateTask({
+  open2,
+  onClose2,
+  taskId,
+  taskName,
+  gettasks,
+}) {
   const [update, setUpdate] = useState("");
-
-  const handleUpdate = () => {
-    onClose2();
-    // onUpdate();
-  };
+  const [show, setShow] = useState(false);
 
   const handleChange = (event) => {
     setUpdate(event.target.value);
   };
 
-  // const handleTaskUpdate = () => {
-  //   const options = {
-  //     method: "PUT",
-  //     url: `https://app.asana.com/api/1.0/tasks/${selectedTask.gid}`,
-  //     headers: {
-  //       accept: "application/json",
-  //       "content-type": "application/json",
-  //       authorization:
-  //         "Bearer 1/1204522153610557:c273f615edb3d7722a3a6104335b636e",
-  //     },
-  //     data: { data: { name: "", workspace: "1140774634764598" } },
-  //   };
-  //   axios
-  //     .request(options)
-  //     .then(function (response) {
-  //       setTasks(tasks);
-  //       console.log(response.data);
-  //     })
-  //     .catch(function (error) {
-  //       console.error(error);
-  //     });
-  // setOpen2(false);
-  // };
+  const handleCheck = () => {
+    if (update.length !== 0) {
+      handleTaskUpdate();
+    } else {
+      setShow(true);
+    }
+  };
+
+  useEffect(() => {
+    if (taskName) {
+      setUpdate(taskName);
+    }
+  }, [taskName]);
+
+  const handleTaskUpdate = () => {
+    const options = {
+      method: "PUT",
+      url: `https://app.asana.com/api/1.0/tasks/${taskId}`,
+      headers: {
+        accept: "application/json",
+        "content-type": "application/json",
+        authorization:
+          "Bearer 1/1204522153610557:c273f615edb3d7722a3a6104335b636e",
+      },
+      data: { data: { name: String(update), workspace: "1140774634764598" } },
+    };
+    axios
+      .request(options)
+      .then(function (response) {
+        console.log(response.data);
+        gettasks();
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+    setShow(false);
+    onClose2();
+  };
 
   return (
     <div>
@@ -70,19 +86,21 @@ export default function UpdateTask({ open2, onClose2 }) {
           <div className="newtask-modalbox">
             <p className="newtask-popup-title">Task Editor</p>
             <TextField
+              defaultValue={taskName}
               label="Edit a task"
               variant="outlined"
               color="info"
               onChange={handleChange}
               focused
             />
+            {show ? <p>Please fill this field.</p> : null}
           </div>
           <div className="cancel-newtask-btn">
             <Button
               size="medium"
               variant="outlined"
               color="success"
-              // onClick={handleUpdate}
+              onClick={handleCheck}
             >
               Update
             </Button>
