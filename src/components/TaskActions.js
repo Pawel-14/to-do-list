@@ -7,7 +7,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-export default function TaskActions({ ActionDelete, handleOpenTask }) {
+export default function TaskActions({ ActionDelete, ActionUpdate, taskId }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -15,14 +15,20 @@ export default function TaskActions({ ActionDelete, handleOpenTask }) {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleDelete = () => {
-    setAnchorEl(null);
-    ActionDelete();
+  const handleUpdate = () => {
+    if (ActionUpdate) {
+      ActionUpdate(taskId);
+      setAnchorEl(null);
+      console.log("editgui1:", ActionUpdate);
+    }
   };
 
-  const handleUpdate = () => {
-    setAnchorEl(null);
-    handleOpenTask();
+  const handleDelete = () => {
+    if (ActionDelete) {
+      ActionDelete(taskId);
+      setAnchorEl(null);
+      console.log("editgui2:", ActionDelete);
+    }
   };
 
   const handleClose = () => {
@@ -49,8 +55,8 @@ export default function TaskActions({ ActionDelete, handleOpenTask }) {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem>
-          <EditIcon onClick={handleUpdate} />
+        <MenuItem onClick={handleUpdate}>
+          <EditIcon />
           Edit
         </MenuItem>
         <MenuItem onClick={handleDelete}>

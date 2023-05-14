@@ -32,19 +32,19 @@ export default function DeleteTask({ open, onClose, onDelete }) {
       <DialogActions>
         <Button
           size="large"
-          color="error"
-          variant="contained"
-          onClick={onClose}
-        >
-          Nie
-        </Button>
-        <Button
-          size="large"
           color="success"
           variant="contained"
           onClick={handleDelete}
         >
           Tak
+        </Button>
+        <Button
+          size="large"
+          color="error"
+          variant="contained"
+          onClick={onClose}
+        >
+          Nie
         </Button>
       </DialogActions>
     </Dialog>
