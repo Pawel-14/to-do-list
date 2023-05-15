@@ -25,15 +25,21 @@ const style = {
 export default function AddNewTask({ gettasks }) {
   const [open, setOpen] = useState(false);
   const [text, setText] = useState("");
+  const [show, setShow] = useState(false);
 
   const handleChange = (event) => {
     setText(event.target.value);
   };
 
-  const handleNewTask = () => {
-    setText(text);
-    console.log(text);
+  const handleCheck = () => {
+    if (text.length !== 0) {
+      handleTaskCreate();
+    } else {
+      setShow(true);
+    }
+  };
 
+  const handleTaskCreate = () => {
     const options = {
       method: "POST",
       url: "https://app.asana.com/api/1.0/tasks",
@@ -66,7 +72,7 @@ export default function AddNewTask({ gettasks }) {
       .catch(function (error) {
         console.error(error);
       });
-
+    setShow(false);
     setOpen(false);
   };
 
@@ -96,13 +102,14 @@ export default function AddNewTask({ gettasks }) {
               onChange={handleChange}
               focused
             />
+            {show ? <p>Please fill this field.</p> : null}
           </div>
           <div className="cancel-newtask-btn">
             <Button
               size="medium"
               variant="outlined"
               color="success"
-              onClick={handleNewTask}
+              onClick={handleCheck}
             >
               Add
             </Button>
