@@ -72,6 +72,7 @@ export default function AddNewTask({ gettasks }) {
       .catch(function (error) {
         console.error(error);
       });
+    setText("");
     setShow(false);
     setOpen(false);
   };
