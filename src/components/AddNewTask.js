@@ -22,7 +22,7 @@ const style = {
   pb: 3,
 };
 
-export default function AddNewTask({ gettasks }) {
+export default function AddNewTask({ gettasks, showprogress }) {
   const [open, setOpen] = useState(false);
   const [text, setText] = useState("");
   const [show, setShow] = useState(false);
@@ -62,16 +62,18 @@ export default function AddNewTask({ gettasks }) {
         },
       },
     };
-
+    showprogress(true);
     axios
       .request(options)
       .then(function (response) {
+        showprogress(false);
         gettasks();
         console.log(response.data);
       })
       .catch(function (error) {
         console.error(error);
       });
+
     setText("");
     setShow(false);
     setOpen(false);
