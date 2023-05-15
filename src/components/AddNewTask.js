@@ -13,6 +13,9 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
+  "@media only screen and (max-width: 768px)": {
+    width: 310,
+  },
   bgcolor: "#172237",
   border: "2px solid #1F6FEB;",
   borderRadius: "3%",
@@ -62,17 +65,15 @@ export default function AddNewTask({ gettasks, showprogress }) {
         },
       },
     };
+
     showprogress(true);
+
     axios
       .request(options)
       .then(function (response) {
-        showprogress(false);
         gettasks();
-        console.log(response.data);
       })
-      .catch(function (error) {
-        console.error(error);
-      });
+      .catch(function (error) {});
 
     setText("");
     setShow(false);
@@ -95,18 +96,18 @@ export default function AddNewTask({ gettasks, showprogress }) {
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <Box sx={{ ...style, width: 400 }}>
-          <div className="newtask-modalbox">
-            <p className="newtask-popup-title">Task Creator</p>
-            <TextField
-              label="Create task"
-              variant="outlined"
-              color="info"
-              onChange={handleChange}
-              focused
-            />
-            {show ? <p>Please fill this field.</p> : null}
-          </div>
+        <Box className="popupbox" sx={{ ...style, width: 380 }}>
+          <p className="newtask-popup-title">Task Creator</p>
+          <TextField
+            InputProps={{ style: { color: "white" } }}
+            label="Create task"
+            variant="outlined"
+            color="info"
+            onChange={handleChange}
+            focused
+          />
+          {show ? <p className="fill-field">Please fill this field.</p> : null}
+
           <div className="cancel-newtask-btn">
             <Button
               size="medium"

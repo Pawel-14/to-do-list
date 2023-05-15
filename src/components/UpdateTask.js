@@ -11,7 +11,10 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: 550,
+  "@media only screen and (max-width: 768px)": {
+    width: 310,
+  },
   bgcolor: "#172237",
   border: "2px solid #1F6FEB;",
   borderRadius: "3%",
@@ -27,6 +30,7 @@ export default function UpdateTask({
   taskId,
   taskName,
   gettasks,
+  showprogress,
 }) {
   const [update, setUpdate] = useState("");
   const [show, setShow] = useState(false);
@@ -61,15 +65,15 @@ export default function UpdateTask({
       },
       data: { data: { name: String(update), workspace: "1140774634764598" } },
     };
+
+    showprogress(true);
+
     axios
       .request(options)
       .then(function (response) {
-        console.log(response.data);
         gettasks();
       })
-      .catch(function (error) {
-        console.error(error);
-      });
+      .catch(function (error) {});
     setShow(false);
     onClose2();
   };
@@ -82,19 +86,19 @@ export default function UpdateTask({
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <Box sx={{ ...style, width: 400 }}>
-          <div className="newtask-modalbox">
-            <p className="newtask-popup-title">Task Editor</p>
-            <TextField
-              defaultValue={taskName}
-              label="Edit a task"
-              variant="outlined"
-              color="info"
-              onChange={handleChange}
-              focused
-            />
-            {show ? <p>Please fill this field.</p> : null}
-          </div>
+        <Box className="popupbox" sx={{ ...style, width: 410 }}>
+          <p className="newtask-popup-title">Task Editor</p>
+          <TextField
+            InputProps={{ style: { color: "white" } }}
+            defaultValue={taskName}
+            label="Edit a task"
+            variant="outlined"
+            color="info"
+            onChange={handleChange}
+            focused
+          />
+          {show ? <p className="fill-field">Please fill this field.</p> : null}
+
           <div className="cancel-newtask-btn">
             <Button
               size="medium"

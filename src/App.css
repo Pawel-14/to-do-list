@@ -86,13 +86,15 @@ p {
   padding-bottom: 5%;
 }
 
-.newtask-modalbox {
-  color: white;
-}
-
 .cancel-newtask-btn {
   display: flex;
-  justify-content: right
+  gap: 10px;
+  float: right;
+  margin-top: 5%;
+}
+
+.fill-field {
+  color: red;
 }
 
 .footer {

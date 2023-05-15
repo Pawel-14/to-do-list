@@ -53,9 +53,8 @@ export default function TaskList() {
       .then(function (response) {
         setTasks(response.data.data);
       })
-      .catch(function (error) {
-        console.error(error);
-      });
+      .catch(function (error) {});
+    setShowProgress(false);
   };
 
   useEffect(() => {
@@ -75,14 +74,14 @@ export default function TaskList() {
     axios
       .request(options)
       .then(function (response) {
-        console.log(response.data);
         setTasks((test) =>
           test.filter((task) => task.gid !== selectedTask.gid)
         );
       })
       .catch(function (error) {
-        console.error(error);
-        console.log(selectedTask);
+        if (error.response && error.response.status === 404) {
+          handletasks();
+        }
       });
   };
 
@@ -124,6 +123,7 @@ export default function TaskList() {
         taskId={TaskId}
         taskName={TaskName}
         gettasks={handletasks}
+        showprogress={setShowProgress}
       />
 
       <DeleteTask
