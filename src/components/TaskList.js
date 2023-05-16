@@ -16,6 +16,7 @@ export default function TaskList() {
   const [TaskId, setTaskId] = useState(null);
   const [TaskName, setTaskName] = useState("");
   const [showProgress, setShowProgress] = useState(false);
+
   const auth = "Bearer 1/1204522153610557:c273f615edb3d7722a3a6104335b636e";
   const project = "1204530829133645";
 
@@ -37,7 +38,7 @@ export default function TaskList() {
     setSelectedTask2(null);
   };
 
-  const handletasks = () => {
+  const handletasks = (withoutProgress = false) => {
     const options = {
       method: "GET",
       url: "https://app.asana.com/api/1.0/tasks",
@@ -48,16 +49,23 @@ export default function TaskList() {
       },
     };
 
+    if (!withoutProgress) {
+      setShowProgress(true);
+    }
+
     axios
       .request(options)
       .then(function (response) {
         setTasks(response.data.data);
+        setShowProgress(false);
       })
-      .catch(function (error) {});
-    setShowProgress(false);
+      .catch(function (error) {
+        setShowProgress(false);
+      });
   };
 
   useEffect(() => {
+    setInterval(handletasks, 5000, [false]);
     handletasks();
   }, []);
 
@@ -70,7 +78,7 @@ export default function TaskList() {
         authorization: auth,
       },
     };
-
+    setShowProgress(true);
     axios
       .request(options)
       .then(function (response) {
@@ -84,7 +92,6 @@ export default function TaskList() {
         }
       });
   };
-
   return (
     <div className="list">
       <Stack direction="row">
