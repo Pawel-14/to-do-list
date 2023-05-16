@@ -121,6 +121,21 @@ p {
 }
 
 @media only screen and (max-width: 768px) {
+  .created-by {
+    display: inline;
+    border-left: 2px solid grey;
+    padding-left: 50px;
+    margin-left: 50px;
+  }
+
+  .footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 2rem;
+    min-height: 10px;
+  }
+
   .task-box {
     padding: 3%;
   }

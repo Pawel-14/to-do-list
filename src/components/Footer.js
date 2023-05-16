@@ -6,7 +6,7 @@ export default function Footer() {
         <a href="https://github.com/Pawel-14" rel="noreferrer" target="_blank">
           GitHub
         </a>
-        <p>Created by Paweł Pankau</p>
+        <p className="created-by">Created by Paweł Pankau</p>
       </div>
     </footer>
   );
