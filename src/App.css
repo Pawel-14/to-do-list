@@ -125,8 +125,8 @@ p {
   .created-by {
     display: inline;
     border-left: 2px solid grey;
-    padding-left: 50px;
-    margin-left: 50px;
+    padding-left: 20px;
+    margin-left: 20px;
   }
 
   .footer {
