@@ -50,18 +50,12 @@ export default function AddNewTask({ gettasks, showprogress }) {
         accept: "application/json",
         "content-type": "application/json",
         authorization:
-          "Bearer 1/1204522153610557:c273f615edb3d7722a3a6104335b636e",
+          "Bearer 1/1204273633699513:48776854ea4da805eeb3b480683606a1",
       },
       data: {
         data: {
-          projects: ["1204530829133645"],
+          projects: ["1204992612619560"],
           name: String(text),
-          workspace: "1140774634764598",
-          assignee_section: "1204530829133648",
-          resource_subtype: "default_task",
-          assignee_status: "upcoming",
-          liked: false,
-          assignee: "1204522159622443",
         },
       },
     };

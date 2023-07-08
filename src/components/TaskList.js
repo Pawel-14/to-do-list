@@ -17,8 +17,8 @@ export default function TaskList() {
   const [TaskName, setTaskName] = useState("");
   const [showProgress, setShowProgress] = useState(false);
 
-  const auth = "Bearer 1/1204522153610557:c273f615edb3d7722a3a6104335b636e";
-  const project = "1204530829133645";
+  const auth = "Bearer 1/1204273633699513:48776854ea4da805eeb3b480683606a1";
+  const project = "1204992612619560";
 
   const handleDeleteClick = (task) => {
     setSelectedTask(task);

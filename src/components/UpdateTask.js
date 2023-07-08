@@ -61,9 +61,9 @@ export default function UpdateTask({
         accept: "application/json",
         "content-type": "application/json",
         authorization:
-          "Bearer 1/1204522153610557:c273f615edb3d7722a3a6104335b636e",
+          "Bearer 1/1204273633699513:48776854ea4da805eeb3b480683606a1",
       },
-      data: { data: { name: String(update), workspace: "1140774634764598" } },
+      data: { data: { name: String(update), workspace: "1204273642736672" } },
     };
 
     showprogress(true);
